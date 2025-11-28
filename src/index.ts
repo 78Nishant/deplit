@@ -37,7 +37,7 @@
 // });
 
 
-// src/index.ts
+
 // src/index.ts
 import cors from "cors";
 import express, { type Request, type Response } from "express";
@@ -64,6 +64,11 @@ app.use(cors());
 app.use(express.json());
 
 const SITE_BASE_URL = process.env.AWS_SITE_BASE_URL; // e.g. http://bucket.s3-website-ap-south-1.amazonaws.com
+
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to the Deployment Server! If you want to deploy, make a POST request to /deploy with { repoUrl: 'your_repo_url' }");
+})
 
 app.post("/deploy", async (req: Request, res: Response) => {
   try {
